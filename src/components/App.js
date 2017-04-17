@@ -30,6 +30,7 @@ class App extends Component {
             <input 
             className="form-control"
             onChange={event => this.setState({text: event.target.value})}
+            placeholder="I have to..."
             onFocus={() => this.setState({text:''})}
             value={this.state.text}
             type="text" />
