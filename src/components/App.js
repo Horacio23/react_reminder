@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux' // used to connect the component to the redux flow
 import { addReminder } from '../actions'
-import { bindActionCreators } from 'redux' //needed to find action creators to the redux flow
 
 import Reminder from './Reminder'
 
@@ -30,6 +29,7 @@ class App extends Component {
             className="form-control"
             onChange={event => this.setState({text: event.target.value})}
             onFocus={() => this.setState({text:''})}
+            value={this.state.text}
             type="text" />
           </div>
           <div className="form-group">
@@ -41,7 +41,9 @@ class App extends Component {
             </button>
           </div>
         </div>
-        {this.props.reminders.map(reminder => <Reminder {...reminder} />)}
+        <ul className="list-group col-sm-4">
+          {this.props.reminders.map(reminder => <Reminder key={reminder.id} {...reminder} />)}
+        </ul>
       </div>
     );
   }
@@ -54,12 +56,12 @@ function mapStateToProps(state) {
   }
 }
 
-// this function will be used when more that one actions will be used, else use the shorthad definition
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({addReminder}, dispatch)
-}
+// // this function will be used when more that one actions will be used, else use the shorthad definition
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({addReminder}, dispatch)
+// }
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps,{addReminder})(App);
 
 //Shortcut for when using just one action creator:
 // export default connect(null,{addReminder})(App);
