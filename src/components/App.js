@@ -9,11 +9,12 @@ import classnames from 'classnames';
 
 class App extends Component {
   state = {
-    text: ''
+    text: '',
+    dueDate:''
   }
 
   addReminder = () => {
-    this.props.addReminder(this.state.text)
+    this.props.addReminder(this.state)
   }
 
   render() {
@@ -31,6 +32,11 @@ class App extends Component {
             onFocus={() => this.setState({text:''})}
             value={this.state.text}
             type="text" />
+            <input 
+              className="form-control"
+              type="datetime-local"
+              onChange={event => this.setState({dueDate: event.target.value})}
+              />
           </div>
           <div className="form-group">
             <button

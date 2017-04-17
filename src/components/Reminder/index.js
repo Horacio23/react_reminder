@@ -12,6 +12,7 @@ class Reminder extends Component {
     return (
         <li className="list-group-item">
           <div className="list-item">{this.props.text}</div>
+          <div className="list-item">{this.props.dueDate}</div>
           <div className="list-item delete-button"
                onClick={()=>this.deleteReminder(this.props.id)}>
             &#x2715;
