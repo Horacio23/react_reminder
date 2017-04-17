@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux' // used to connect the component to the redux flow
-import { addReminder } from '../actions'
-
+import { addReminder, clearReminders } from '../actions'
 import Reminder from './Reminder'
-
 import classnames from 'classnames';
 
 
@@ -15,6 +13,9 @@ class App extends Component {
 
   addReminder = () => {
     this.props.addReminder(this.state)
+  }
+  clearReminders = () => {
+    this.props.clearReminders()
   }
 
   render() {
@@ -50,6 +51,13 @@ class App extends Component {
         <ul className="list-group col-sm-4">
           {this.props.reminders.map(reminder => <Reminder key={reminder.id} {...reminder} />)}
         </ul>
+        <div className="">
+          <button 
+            className="btn btn-danger"
+            onClick={this.clearReminders}>
+            Clear Reminders
+          </button>
+        </div>
       </div>
     );
   }
@@ -67,7 +75,7 @@ function mapStateToProps(state) {
 //   return bindActionCreators({addReminder}, dispatch)
 // }
 
-export default connect(mapStateToProps,{addReminder})(App);
+export default connect(mapStateToProps,{addReminder, clearReminders})(App);
 
 //Shortcut for when using just one action creator:
 // export default connect(null,{addReminder})(App);
